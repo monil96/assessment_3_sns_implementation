@@ -67,4 +67,4 @@ event:804c4430-0910-11ea-8b7e-0a58ad5bfff2 Sample data file being read from AWS
 
 2. Bucket Name:  apisero-assessment-monil
 3. Topic Name: monil-porwal-mule-notifier
-4. Sample file name: aws_sample.txt
+4. Sample file name: sample_aws.txt
