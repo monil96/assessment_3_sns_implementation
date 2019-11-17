@@ -1,6 +1,7 @@
 # assessment_3_sns_implementation
 
 1. CloudHub Logs:
+
 13:26:30.158     11/17/2019     Deployment     system     SYSTEM
 Application queued to be deployed...
 13:26:32.515     11/17/2019     Deployment     system     SYSTEM
