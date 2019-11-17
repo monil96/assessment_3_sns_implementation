@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:s3="http://www.mulesoft.org/schema/mule/s3" xmlns:sns="http://www.mulesoft.org/schema/mule/sns"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/sns http://www.mulesoft.org/schema/mule/sns/current/mule-sns.xsd
+http://www.mulesoft.org/schema/mule/s3 http://www.mulesoft.org/schema/mule/s3/current/mule-s3.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b2373288-ded7-4113-88a2-e69869ffd970" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<sns:config name="Amazon_SNS_configuration" doc:name="Amazon SNS configuration" doc:id="b322f10c-4040-4475-b7e0-6e92f6918bc7" >
+		<sns:basic-connection testTopic="arn:aws:sns:us-east-2:211556697089:monil-porwal-mule-notifier" accessKey="AKIAJWKZDPLHRO4WPP7A" secretKey="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" region="US_EAST_2" />
+	</sns:config>
+	<s3:config name="Amazon_S3_Configuration" doc:name="Amazon S3 Configuration" doc:id="ae1c6465-5397-4cd9-823c-74aa8c84ac4c" >
+		<s3:basic-connection accessKey="AKIAJWKZDPLHRO4WPP7A" secretKey="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" region="US_EAST_2" />
+	</s3:config>
+	<flow name="aws_s3_sns_implementationFlow" doc:id="da085e47-a76e-467e-8bec-ab344cf0f78a" >
+		<http:listener doc:name="Listener" doc:id="7ba0be12-0a64-4ce8-9b18-09c1fc99c890" config-ref="HTTP_Listener_config" path="/snsimplementation"/>
+		<s3:get-object doc:name="Get object" doc:id="dffdedfe-a155-4f85-a2bb-11c8003f83cd" config-ref="Amazon_S3_Configuration" bucketName="apisero-assessment-monil" key="sample_aws.txt"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8aae3bf6-0290-42aa-8324-ec12a4b14941" message="#[payload]"/>
+	</flow>
+</mule>
